@@ -1,0 +1,9 @@
+Ethnicity,ethnicity.txt
+Country of Birth,country.txt
+Residency,country.txt
+Religion,religion.txt
+Bloodtype,bloodtype.txt
+Civil Status,civil_status.txt
+Educational Background,education.txt
+Disease History,disease.txt
+Mothers Maiden Name,mothers_maiden_name.txt
