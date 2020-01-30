@@ -191,7 +191,12 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Expires:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "CVC2:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Paypal:" "..."
-	printf "$FORMAT_STRING_TWO_COL%s" "Account Balance:" "$(( RANDOM % 9999 ))" "\$" #Local currency enhancement (based off of country residency)
+	printf "$FORMAT_STRING_TWO_COL" "BTC Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "ETH Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "LTC Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "XLM Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "XRP Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL%s" "Bankaccount Balance:" "$(( RANDOM % 9999 ))" "\$" #Local currency enhancement (based off of country residency)
 	printf "$FORMAT_STRING_TWO_COL" "Prederred Payment:" "${PREFERRED_PAYMENT_TYPE[$[RANDOM % ${#PREFERRED_PAYMENT_TYPE[@]}]]}"
 
 	# EMPLOYMENT INFORMATION
@@ -208,7 +213,10 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Color:" "${COLORS[$[RANDOM % ${#COLORS[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Vehicle:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Car License Plate:" "..." #country dependent
-	printf "$FORMAT_STRING_TWO_COL" "GUID:" "..." # whats this?
+	printf "$FORMAT_STRING_TWO_COL" "GUID:" "..." 
+	printf "$FORMAT_STRING_TWO_COL" "Laptop Brand:" "..." 
+	printf "$FORMAT_STRING_TWO_COL" "Stationary PC Brand:" "..." 
+
 	printf "$FORMAT_STRING_TWO_COL" "QR Code:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Music Genre:" "..."
@@ -221,6 +229,7 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Food:" "..."
 	printf "$FORMAT_STRING_TWO_COL%s%s" "Personality:" "$(shuf -n 3 traits.list)" # use the trait list, select a few
 	printf "$FORMAT_STRING_TWO_COL" "Last Known IP:" "..." # Class A/B/C (think about it)
+	printf "$FORMAT_STRING_TWO_COL" "MAC Address:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Timezone:" "..."
 
 	# LOGIC
