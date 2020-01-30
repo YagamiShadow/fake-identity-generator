@@ -3,7 +3,7 @@ Bash script for generating unique identities for assisting purposes like OSINT f
 **Far from finished - expect bugs**
 ## Getting Started
 
-Clone the repo, cd into the folder and './ident_gen.sh'. Next type the number of identites you wish to generate and voila!
+Run the script with number of identites you wish to generate: e.g. $ ./ident_gen.sh 15
 
 ### Prerequisites
 
