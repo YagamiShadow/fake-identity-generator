@@ -1,15 +1,14 @@
 # Fake Identity Generator [WIP]
 Bash script for generating unique identities for assisting purposes like OSINT for example.
-
+**Far from finished - expect bugs**
 ## Getting Started
 
-Clone the repo and do `chmod a+r *` and `chmod +x ident_gen.sh`
+Clone the repo, cd into the folder and './ident_gen.sh'. Next type the number of identites you wish to generate and voila!
 
 ### Prerequisites
 
-Developed with: 
+Developed in: 
 * GNU bash 5.0.11
-* mawk 1.3.3
 
 ## Contributing
 
