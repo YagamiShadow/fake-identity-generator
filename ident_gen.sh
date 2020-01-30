@@ -38,26 +38,35 @@ DANISH_MOBILE_PREFIX=(20 21 22 23 24 25 26 27 28 29 30 31 40 41 42 50 51 52 53 6
 
 # FUNCTIONS ----------------------------------------------------------------------------------------------------------------
 function print_welcome {
-cat << 'WELCOME'
+	cat << 'WELCOME'
 ███████╗ █████╗ ██╗  ██╗███████╗    ██╗██████╗ ███████╗███╗   ██╗████████╗██╗████████╗██╗   ██╗
 ██╔════╝██╔══██╗██║ ██╔╝██╔════╝    ██║██╔══██╗██╔════╝████╗  ██║╚══██╔══╝██║╚══██╔══╝╚██╗ ██╔╝
 █████╗  ███████║█████╔╝ █████╗      ██║██║  ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║    ╚████╔╝ 
 ██╔══╝  ██╔══██║██╔═██╗ ██╔══╝      ██║██║  ██║██╔══╝  ██║╚██╗██║   ██║   ██║   ██║     ╚██╔╝  
 ██║     ██║  ██║██║  ██╗███████╗    ██║██████╔╝███████╗██║ ╚████║   ██║   ██║   ██║      ██║   
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝   ╚═╝      ╚═╝   
-                                                                                               
-         ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ████████╗ ██████╗ ██████╗           
-        ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗          
-        ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║   ██║   ██║   ██║██████╔╝          
-        ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗          
-        ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║          
-         ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝          
+
+	 ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ████████╗ ██████╗ ██████╗           
+	██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗          
+	██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║   ██║   ██║   ██║██████╔╝          
+	██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗          
+	╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║          
+	 ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝          
 WELCOME
 printf "\n" ""
 printf "  %s %s %s\n" "[+]" "Author:" "SmokingCuke"
 printf "  %s %s %s\n" "[+]" "Github:" "SmokingCuke"
 printf "  %s %s %s\n\n\n" "[+]" "Description:" "This tool creates fake identities/personas that can be used when doing OSINT or for general OPSEC."
 }
+#function generate_ip {
+#	return external_ip="$(( RANDOM % 192 - 223 + 192 ))."
+#}
+
+
+#function generate_mac {
+#return
+#}
+
 function luhn_validate { # <numeric-string>
 	input_number=$1
 	shift 1
@@ -128,14 +137,14 @@ FORMAT_STRING_THREE_COL="%s %s %s\n"
 while [ "$input_numberberOfIdentities" -ge 1 ]
 do
 	# PERSONAL INFORMATION
-	credit_card_input_number="293828119299399" # Use function to generate last digit
-	credit_card_input_number=$( luhn_generate_last_digit "${credit_card_input_number}" )
-	if [ $? -eq 1 ]; then # 1 is error, 0 success
-		luhn_validate "${credit_card_input_number}"
-	else
-		echo "Fault, exiting"
-		exit;
-	fi
+	#	credit_card_input_number="293828119299399" # Use function to generate last digit
+	#	credit_card_input_number=$( luhn_generate_last_digit "${credit_card_input_number}" )
+	#	if [ $? -eq 1 ]; then # 1 is error, 0 success
+	#		luhn_validate "${credit_card_input_number}"
+	#	else
+	#		echo "Fault, exiting"
+	#		exit;
+	#	fi
 
 	sex=$((1 + RANDOM % 2))
 	printf '%s\n' "========== ${count} =========="
@@ -227,9 +236,11 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie Star:" "..." # same as below
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Singer:" "..." #list of singers, must be able to find that somewhere easily
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Food:" "..."
-	printf "$FORMAT_STRING_TWO_COL%s%s" "Personality:" "$(shuf -n 3 traits.list)" # use the trait list, select a few
-	printf "$FORMAT_STRING_TWO_COL" "Last Known IP:" "..." # Class A/B/C (think about it)
-	printf "$FORMAT_STRING_TWO_COL" "MAC Address:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "Personality:" "$(shuf -n 1 traits.list)" 
+	printf "$FORMAT_STRING_TWO_COL" "" "$(shuf -n 1 traits.list)"
+	printf "$FORMAT_STRING_TWO_COL" "" "$(shuf -n 1 traits.list)"
+	printf "$FORMAT_STRING_TWO_COL" "Last Known IP:" "$( shuf -i 192-223 -n 1 ).$( shuf -i 1-254 -n 1 ).$( shuf -i 1-254 -n 1 ).$( shuf -i 1-254 -n 1 )"
+	printf "%-${padding}s%02X:%02X:%02X:%02X:%02X:%02X\n" "MAC Address" $[RANDOM%256] $[RANDOM%256] $[RANDOM%256] $[RANDOM%256]  $[RANDOM%256] $[RANDOM%256]
 	printf "$FORMAT_STRING_TWO_COL" "Timezone:" "..."
 
 	# LOGIC
