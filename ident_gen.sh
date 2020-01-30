@@ -16,7 +16,7 @@ COUNTRY_LIST=countries.txt
 MALE_NAMES=male_names.txt
 FEMALE_NAMES=female_names.txt
 PLACEHOLDER=null.txt
-
+RARE_DISEASES=./disease/rare_diseases.txt
 # VARIABLES ----------------------------------------------------------------------------------------------------------------
 declare -A COUNTRY_PREFIX
 
@@ -54,18 +54,24 @@ function print_welcome {
 	 ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝          
 WELCOME
 printf "\n" ""
-printf "  %s %s %s\n" "[+]" "Author:" "SmokingCuke"
-printf "  %s %s %s\n" "[+]" "Github:" "SmokingCuke"
+printf "  %s %s %s\n" "[+]" "Author:" "https://github.com/smokingcuke"
+printf "  %s %s %s\n" "[+]" "Github Repository:" "https://github.com/smokingcuke/fake-identity-generator"
 printf "  %s %s %s\n\n\n" "[+]" "Description:" "This tool creates fake identities/personas that can be used when doing OSINT or for general OPSEC."
 }
-#function generate_ip {
-#	return external_ip="$(( RANDOM % 192 - 223 + 192 ))."
-#}
 
-
-#function generate_mac {
-#return
-#}
+function print_laptop {
+	flip=$(( RANDOM % 2 ))
+	#echo ${flip}
+	if [[ ${flip} -eq 0 ]]; then
+		user_has_laptop=1;
+		printf "$FORMAT_STRING_TWO_COL" "Laptop:" "[+]"
+		printf "$FORMAT_STRING_TWO_COL" "Laptop Brand:" $( shuf -n 1 <( printf "%s\n%s\n%s\n" "HP" "Dell" "Lenovo" "Apple" "Asus" "Acer" ) )
+	else
+		user_has_laptop=0;
+		printf "$FORMAT_STRING_TWO_COL" "Laptop:" "[-]"
+		printf "$FORMAT_STRING_TWO_COL" "Laptop Brand:" "N/A"
+	fi
+}
 
 function luhn_validate { # <numeric-string>
 	input_number=$1
@@ -145,8 +151,9 @@ do
 	#		echo "Fault, exiting"
 	#		exit;
 	#	fi
-
+	uuid=$( cat /proc/sys/kernel/random/uuid )	
 	sex=$((1 + RANDOM % 2))
+	first_digits=$[RANDOM % ${#DANISH_MOBILE_PREFIX[@]}]
 	printf '%s\n' "========== ${count} =========="
 	printf "\n%s\n"		        "Basic Information"
 	if [ $sex -eq 1 ]
@@ -160,7 +167,6 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Age: " $(( RANDOM % 13 + 62))
 	printf "$FORMAT_STRING_TWO_COL" "Height:"  $(( RANDOM % 145 + 75)) "cm"
 	printf "$FORMAT_STRING_TWO_COL" "Weight:"  $(( RANDOM % 50 + 100)) "kg"
-	first_digits=$[RANDOM % ${#DANISH_MOBILE_PREFIX[@]}]
 	printf "%-${padding}s%-s" "Phone No.:" "${COUNTRY_PREFIX[DA]}"
 	printf " %-d%06d\n" "${DANISH_MOBILE_PREFIX[${first_digits}]}" "$((RANDOM % 999999))"
 	printf "$FORMAT_STRING_TWO_COL" "Bloodtype:" "${BLOODTYPE[$[RANDOM % ${#BLOODTYPE[@]}]]}"
@@ -168,9 +174,10 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Religion:" "${RELIGION[$[RANDOM % ${#RELIGION[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Civil Status:" "${CIVIL_STATUS[$[RANDOM % ${#CIVIL_STATUS[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Sexual Identity:" "${SEXUAL_IDENTITY[$[RANDOM % ${#SEXUAL_IDENTITY[@]}]]}"
-	printf "$FORMAT_STRING_TWO_COL" "Mothers Maiden Name:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "SSN:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Geo Coordinates:" "..."	# Geo coordinates ##.#####, -##.######
+	printf "$FORMAT_STRING_TWO_COL" "Disease (rare):" "$( shuf -n 1 $RARE_DISEASES )"
+	printf "$FORMAT_STRING_TWO_COL" "Mothers Maiden Name:" ""
+	printf "$FORMAT_STRING_TWO_COL" "SSN:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Geo Coordinates:" ""
 
 	# ONLINE IDENTITIES
 	printf "\n%s\n"		        "Online Identities"
@@ -222,20 +229,19 @@ do
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Color:" "${COLORS[$[RANDOM % ${#COLORS[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Vehicle:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Car License Plate:" "..." #country dependent
-	printf "$FORMAT_STRING_TWO_COL" "GUID:" "..." 
-	printf "$FORMAT_STRING_TWO_COL" "Laptop Brand:" "..." 
-	printf "$FORMAT_STRING_TWO_COL" "Stationary PC Brand:" "..." 
-
-	printf "$FORMAT_STRING_TWO_COL" "QR Code:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Music Genre:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Song:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Book:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Sport:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Favorite TV Show:" "..." #same as below
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie Star:" "..." # same as below
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Singer:" "..." #list of singers, must be able to find that somewhere easily
-	printf "$FORMAT_STRING_TWO_COL" "Favorite Food:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "UUID:" "${uuid}"
+	print_laptop
+	printf "$FORMAT_STRING_TWO_COL" "Stationary PC Brand:" "" 
+	printf "$FORMAT_STRING_TWO_COL" "QR Code:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Music Genre:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Song:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Book:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Sport:" ""
+	printf "$FORMAT_STRING_TWO_COL" "Favorite TV Show:" "" #same as below
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Movie Star:" "" # same as below
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Singer:" "" #list of singers, must be able to find that somewhere easily
+	printf "$FORMAT_STRING_TWO_COL" "Favorite Food:" ""
 	printf "$FORMAT_STRING_TWO_COL" "Personality:" "$(shuf -n 1 traits.list)" 
 	printf "$FORMAT_STRING_TWO_COL" "" "$(shuf -n 1 traits.list)"
 	printf "$FORMAT_STRING_TWO_COL" "" "$(shuf -n 1 traits.list)"
@@ -246,7 +252,6 @@ do
 	# LOGIC
 	count=$(( count + 1 ))
 	input_numberberOfIdentities=$(( input_numberberOfIdentities - 1 ))
-	echo
 done
 
 ## IDEAS FOR ENHANCEMENTS --------------------------------------------------------------------------------------------------
