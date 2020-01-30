@@ -35,7 +35,8 @@ COLORS=('Red' 'Orange' 'Yellow' 'Green' 'Cyan' 'Blue' 'Indigo' 'Violet' 'Purple'
 INTERESTS=('Travelling' 'Reading' 'Blogging' 'Hiking' 'Fishing' 'Art' 'Music' 'Volunteering')
 COUNTRY_PREFIX[DA]="+45"
 DANISH_MOBILE_PREFIX=(20 21 22 23 24 25 26 27 28 29 30 31 40 41 42 50 51 52 53 60 61 71 81 91 92 93) # Source: https://ens.dk/ansvarsomraader/telefoni/numre/den-danske-nummerplan
-
+COUNTRY_CODE="DK"
+LICENSE_PLATE=$( printf '%2s-%02d-%03d' $( head /dev/urandom | tr -dc A-Z | head -c 2 ) $( printf '%02d' $( shuf -i 00-99 -n 1 ) ) $( printf '%03d' $( shuf -i 000-999 -n 1 ) ) )
 # FUNCTIONS ----------------------------------------------------------------------------------------------------------------
 function print_welcome {
 	cat << 'WELCOME'
@@ -61,7 +62,6 @@ printf "  %s %s %s\n\n\n" "[+]" "Description:" "This tool creates fake identitie
 
 function print_laptop {
 	flip=$(( RANDOM % 2 ))
-	#echo ${flip}
 	if [[ ${flip} -eq 0 ]]; then
 		user_has_laptop=1;
 		printf "$FORMAT_STRING_TWO_COL" "Laptop:" "[+]"
@@ -228,7 +228,7 @@ do
 	printf "\n%s\n"		        "Other Information"
 	printf "$FORMAT_STRING_TWO_COL" "Favorite Color:" "${COLORS[$[RANDOM % ${#COLORS[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Vehicle:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Car License Plate:" "..." #country dependent
+	printf "$FORMAT_STRING_TWO_COL" "Car License Plate:" "${LICENSE_PLATE}"
 	printf "$FORMAT_STRING_TWO_COL" "UUID:" "${uuid}"
 	print_laptop
 	printf "$FORMAT_STRING_TWO_COL" "Stationary PC Brand:" "" 
