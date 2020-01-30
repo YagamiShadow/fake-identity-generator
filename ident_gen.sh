@@ -188,10 +188,10 @@ do
 
 	# EDUCATIONAL INFORMATION
 	printf "$FORMAT_STRING_TWO_COL" "Education"
-	printf "$FORMAT_STRING_TWO_COL" "Educational Background:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "Educational Background:" "$( shuf -n 1 <( printf "%s\n" "Less than highschool" "GED" "Some college, no degree" "Associate\'s degree" "Bachelor\'s degree" "Masters degree" "Doctoral or professional degree" ) )"
 	printf "$FORMAT_STRING_TWO_COL" "Passport:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Driver License:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Family Members:" "..." # 1..20 ? 
+	printf "$FORMAT_STRING_TWO_COL" "Family Members:" "$( shuf -i 1-20 -n 1 )" 
 	printf "$FORMAT_STRING_TWO_COL" "Interests:" "${INTERESTS[$[RANDOM % ${#INTERESTS[@]}]]}"
 
 	# FINANCIAL INFORMATION
