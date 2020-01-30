@@ -212,8 +212,8 @@ do
 	printf "\n%s\n"		        "Employment"
 	printf "$FORMAT_STRING_TWO_COL" "Company:" "..."
 	printf "$FORMAT_STRING_TWO_COL" "Occupation:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Monthly Salary:" "..."
-	printf "$FORMAT_STRING_TWO_COL" "Employment Status:" "..."
+	printf "$FORMAT_STRING_TWO_COL" "Monthly Salary:" "$( shuf -i 2000-9500 -n 1 )\$"
+	printf "$FORMAT_STRING_TWO_COL" "Employment Status:" $( shuf -n 1 <( printf "%s\n%s\n%s\n" "Employee" "Worker" "Self-employed" ) )
 	printf "$FORMAT_STRING_TWO_COL" "Company Size:" "${COMPANY_SIZE[$[RANDOM % ${#COMPANY_SIZE[@]}]]}"
 	printf "$FORMAT_STRING_TWO_COL" "Industry Sector:" "${INDUSTRY_SECTOR[$[RANDOM % ${#INDUSTRY_SECTOR[@]}]]}"
 
